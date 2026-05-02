@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import pool from "../db/database";
+import { broadcastAllRobots } from '../websocket/server'
 import { RobotCommand, RobotStatus } from '../types'
 
 
@@ -93,6 +94,8 @@ router.post('/:id/command', async (req: Request, res: Response) => {
             INSERT INTO commands (robot_id, command, previous_status, new_status)
             VALUES ($1, $2, $3, $4)
     `, [id, command, previousStatus, newStatus])
+
+        await broadcastAllRobots()
 
         res.json({
             success: true,

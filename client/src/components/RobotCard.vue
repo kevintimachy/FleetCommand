@@ -34,12 +34,19 @@
     <!-- Spacer pushes button to bottom -->
     <div class="flex-1"></div>
 
-    <!-- Command Button -->
-    <button 
-      @click="$emit('command', robot)"
-      class="w-full py-2 rounded-lg text-xs font-medium tracking-wider uppercase border border-border text-text-secondary hover:border-accent hover:text-accent transition-all duration-300">
-      Send Command
-    </button>
+    <!-- Buttons -->
+    <div class="flex gap-2">
+      <button 
+        @click="$emit('command', robot)"
+        class="flex-1 py-2 rounded-lg text-xs font-medium tracking-wider uppercase border border-border text-text-secondary hover:border-accent hover:text-accent transition-all duration-300">
+        Command
+      </button>
+      <button 
+        @click="$emit('history', robot)"
+        class="flex-1 py-2 rounded-lg text-xs font-medium tracking-wider uppercase border border-border text-text-secondary hover:border-accent hover:text-accent transition-all duration-300">
+        History
+      </button>
+    </div>
 
   </div>
 </template>
@@ -54,7 +61,8 @@ const props = defineProps<{
 }>()
 
 defineEmits < {
-    command:[robot: Robot]
+  command: [robot: Robot]
+  history: [robot: Robot]
 }>()
 
 const statusColors: Record<RobotStatus, string> = {

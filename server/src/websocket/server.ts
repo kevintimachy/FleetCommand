@@ -64,6 +64,23 @@ async function simulateRobots() {
                 newStatus = 'error'
             }
 
+            // Battery critical
+            if (newBattery === 0) {
+                newStatus = 'offline'
+            } else if (newBattery < 20 && robot.status !== 'charging' && robot.status !== 'error') {
+                newStatus = 'error'
+            }
+
+            // Auto charging — never touches offline robots
+            if (newStatus === 'error' && newBattery < 20) {
+                const shouldAutoCharge = Math.random() < 0.3 // 30% chance
+                if (shouldAutoCharge) newStatus = 'charging'
+            }
+
+            if (newBattery < 10 && newStatus !== 'offline') {
+                newStatus = 'charging'
+            }
+
             // Random status flips
             const shouldFlip = Math.random() < 0.2
             if (shouldFlip && newBattery >= 20) {

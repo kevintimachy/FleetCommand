@@ -1,6 +1,6 @@
 import type { Robot, RobotCommand, Command } from '../types'
 
-const BASE_URL = 'http://localhost:3001/api'
+const BASE_URL = import.meta.env.VITE_API_URL
 
 export async function fetchRobots(): Promise<Robot[]> {
     const res = await fetch(`${BASE_URL}/robots`)

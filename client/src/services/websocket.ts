@@ -1,6 +1,6 @@
 import type { Robot } from '../types'
 
-const WS_URL = 'ws://localhost:3001'
+const WS_URL = import.meta.env.VITE_WS_URL
 
 export function createWebSocket(
     onRobotsUpdate: (robots: Robot[]) => void,

@@ -13,16 +13,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Robot } from '../types'
-
+import { statusColors } from '../composables/useStatusColors';
 const props = defineProps<{
   robots: Robot[]
 }>()
 
 const stats = computed(() => [
   { label: 'Total', value: props.robots.length, color: '#e8f4fd' },
-  { label: 'Active', value: props.robots.filter(r => ['moving', 'working'].includes(r.status)).length, color: '#00b4d8' },
-  { label: 'Errors', value: props.robots.filter(r => r.status === 'error').length, color: '#ff6b6b' },
-  { label: 'Charging', value: props.robots.filter(r => r.status === 'charging').length, color: '#f59e0b' },
-  { label: 'Offline', value: props.robots.filter(r => r.status === 'offline').length, color: '#2d4a6b' }
+  { label: 'Active', value: props.robots.filter(r => ['moving', 'working'].includes(r.status)).length, color: statusColors.moving },
+  { label: 'Errors', value: props.robots.filter(r => r.status === 'error').length, color: statusColors.error },
+  { label: 'Charging', value: props.robots.filter(r => r.status === 'charging').length, color: statusColors.charging },
+  { label: 'Offline', value: props.robots.filter(r => r.status === 'offline').length, color: statusColors.offline }
 ])
 </script>

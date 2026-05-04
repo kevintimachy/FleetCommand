@@ -69,6 +69,6 @@ const commands: { value: RobotCommand, label: string }[] = [
   { value: 'stop', label: 'Stop' },
   { value: 'shutdown', label: 'Shutdown' },
 ]
-const statusColor = computed(() => getStatusColor(props.robot.status))
-const statusGlow = computed(() => getStatusGlow(props.robot.status))
+const statusColor = computed(() => props.robot ? getStatusColor(props.robot.status) : '')
+const statusGlow = computed(() => props.robot ? getStatusGlow(props.robot.status) : '')
 </script>
